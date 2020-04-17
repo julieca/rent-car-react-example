@@ -1,0 +1,10 @@
+.img{
+  width: 50%;
+  max-height: 130px;
+  margin-right: 20px;
+  float: right;
+}
+.text{
+  font-size: 1.2em;
+  margin: 8px !important;
+}

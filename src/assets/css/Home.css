@@ -1,0 +1,30 @@
+
+.App {
+  text-align: center;
+}
+.nav{
+  /* position: absolute; */
+  position: fixed;
+  float: bottom;
+  bottom: 0;
+  width: 98%;
+}
+.img-thumbnail{
+  width: 50px;
+}
+.scrollable{
+  overflow: auto;
+  white-space: nowrap;
+}
+.end{
+  height: 60px;
+}
+/* .outer{
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+}
+.inner {
+  display: inline-block;
+  margin: 5px;
+} */

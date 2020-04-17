@@ -1,0 +1,9 @@
+.card-desc{
+  text-align: justify;
+}
+.card-action{
+  text-align: right;
+}
+.card-action > span{
+  margin-right: 20px;
+}
