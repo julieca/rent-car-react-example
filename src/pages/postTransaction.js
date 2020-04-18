@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import {
-  useHistory
+  Link
 } from "react-router-dom";
 
 import moment from "moment";
@@ -11,14 +11,11 @@ import {
   Grid, FormControl, InputLabel, Select, MenuItem, ListItemText, Card, Button, Typography, CardContent, Snackbar, TextField
 } from '@material-ui/core';
 
-
-
 import PaperRent from "../component/paperRent";
-import { getRentCar } from '../actions';
+import { getRentCar, postTransaction } from '../actions';
 
 const PostTransaction = props => {
 
-  // rentSelect, hold platnum of car/s selected
   const [rentSelect, setRentSelect] = React.useState([]);
   const [discount, setDiscount] = React.useState(0);
   const [price, setPrice] = React.useState(0);
@@ -26,10 +23,9 @@ const PostTransaction = props => {
   const [rentFrom, setRentFrom] = React.useState('');
   const [rentTo, setRentTo] = React.useState('');
   const [open, setOpen] = React.useState(false);
-  // const history = useHistory();
 
   useEffect(() => {
-    if (!props.data.rentCar) {
+    if (!props.data.cars) {
       props.getRentCar();
     }
   }, []);
@@ -38,7 +34,8 @@ const PostTransaction = props => {
   }, [rentSelect, rentFrom, rentTo]);
 
   const bookNow = () => {
-    // postTransaction(rentFrom, rentTo, rentSelect, total);
+    const tr = { rentFrom, rentTo, cars: rentSelect, total };
+    props.postTransaction(tr);
     setOpen(true);
   }
 
@@ -51,7 +48,7 @@ const PostTransaction = props => {
       let disc = 0;
       for (let i = 0; i < rentSelect.length; i++) {
         // let selected = rentSelect[i];
-        const selected = props.data.cars.find(car => car.platNum == rentSelect[i]);
+        const selected = props.data.cars.find(car => car.platNum === rentSelect[i]);
 
         let pri = (selected.price * days);
 
@@ -81,6 +78,7 @@ const PostTransaction = props => {
     <div style={{ padding: "30px" }}>
       <Grid container justify="center" alignItems="center">
         <Grid item xs={12} sm={9} md={6}>
+          <Link to="/home">Back</Link>
           <FormControl style={{ width: "100%" }}>
             <Grid container justify="center" alignItems="center">
               <Grid item xs={6}>
@@ -187,6 +185,7 @@ const mapStateToProps = ({ data }) => {
   return { data }
 }
 const mapDispatchToProps = dispatch => ({
-  getRentCar: () => dispatch(getRentCar())
+  getRentCar: () => dispatch(getRentCar()),
+  postTransaction: (tr) => dispatch(postTransaction(tr))
 });
 export default connect(mapStateToProps, mapDispatchToProps)(PostTransaction);

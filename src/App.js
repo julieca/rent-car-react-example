@@ -1,7 +1,6 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Provider } from 'react-redux';
-import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import listCar from './pages/listCar';
 import postCar from './pages/postCar';
@@ -18,22 +17,17 @@ const theme = createMuiTheme({
 });
 const App = ({ store }) => (
   <ThemeProvider theme={theme}>
+    Julieca
     <Provider store={store}>
       <Router>
         <Switch>
           <Route path="/home" component={listCar} />
-          <Route path="/add" component={postCar} />
-          {/* <Route path="/update/:id" component={Detail} /> */}
-          {/* <Route path="/delete/:id" component={Detail} /> */}
+          <Route path="/add/:id?" component={postCar} />
           <Route path="/transaction" component={postTransaction} />
-          {/* <Redirect to="/add" /> */}
         </Switch>
       </Router>
     </Provider>
   </ThemeProvider>
 
 )
-// App.propTypes = {
-//   store: PropTypes.object.isRequired
-// }
 export default App

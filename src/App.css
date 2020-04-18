@@ -31,3 +31,6 @@ body {
 .content{
   padding: 15px
 }
+.MuiTextField-root{
+  margin: 15px !important;
+}
